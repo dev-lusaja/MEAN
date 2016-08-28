@@ -1,21 +1,20 @@
 var express = require('express');
-var app = express();
 var bodyParser = require('body-parser');
 var methodOverride = require('method-override');
 var mongoose = require('mongoose');
+
+var app = express();
+var router = express.Router();
 
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 app.use(methodOverride());
 
-var router =express.Router();
-
-router.get('/', function(req, res) {
-	res.send('Hola mundo');
-})
+var config = require('./configs');
+require('./routes/routes')(router);
 
 app.use(router);
 
-app.listen(3000, function() {
-	console.log("server corriendo");
+app.listen(config.port, function() {
+	console.log("Listen server on port: " + config.port);
 });

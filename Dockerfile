@@ -6,4 +6,4 @@ WORKDIR /usr/local/mean
 RUN npm install nodemon -g
 RUN npm install
 
-CMD ["nodemon", "app/server.js"]
+CMD ["nodemon", "-L", "app/server.js"]
