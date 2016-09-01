@@ -1,20 +1,26 @@
-var express = require('express');
-var bodyParser = require('body-parser');
-var methodOverride = require('method-override');
-var mongoose = require('mongoose');
+var express 		= require('express');
+var bodyParser 		= require('body-parser');
+var mongoose		= require('mongoose');
 
-var app = express();
-var router = express.Router();
+var config 			= require('./configs');
+
+var app 			= express();
+var router 			= express.Router();
 
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
-app.use(methodOverride());
 
-var config = require('./configs');
-require('./routes/routes')(router);
+require('./middlewares')(router);
+require('./routes')(router);
 
-app.use(router);
+app.use(config.apiPrefix, router);
 
-app.listen(config.port, function() {
-	console.log("Listen server on port: " + config.port);
+mongoose.connect(config.dbUri, function(err, res) {
+	if (err) { 
+		console.log('DB connect error: ' + err); 
+	} else {
+		app.listen(config.port, function() {
+		console.log('Server listen on port: ' + config.port);
+});
+	}
 });

@@ -1,1 +1,3 @@
-exports.IndexController = require('./controller_index');
+// List of controllers
+exports.IndexController = require('./controllerIndex');
+exports.ServerController = require('./controllerServerType');
