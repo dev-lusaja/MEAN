@@ -6,6 +6,6 @@ module.exports = function (router) {
 
 	// server type collection
 	router.get('/server/types', controllers.ServerTypeController.All);
-	router.get('/server/types/:serverTypeId', controllers.ServerTypeController.ById);
+	router.get('/server/types/:id', controllers.ServerTypeController.ById);
 	router.post('/server/types', controllers.ServerTypeController.Save);
 }

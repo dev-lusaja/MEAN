@@ -14,7 +14,7 @@ exports.All = function(req, res) {
 
 // Return a server type by id
 exports.ById = function(req, res) {
-	ServerTypes.findById(req.params.serverTypeId ,function(err, servertype) {
+	ServerTypes.findById(req.params.id ,function(err, servertype) {
 		if (err) {
 			res.status(config.errorCode).json({error: err.message});
 		} else {
