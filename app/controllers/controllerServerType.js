@@ -26,15 +26,45 @@ exports.ById = function(req, res) {
 // Save a server type
 exports.Save = function(req, res) {
 	var serverTypes = new ServerTypes;
-	serverTypes.type = req.body.type;
+	serverTypes.description = req.body.type;
 	serverTypes.createDate = req.body.createDate;
 
 	serverTypes.save(function(err) {
 		if (err) {
 			res.status(config.errorCode).json({error: err.message});
 		} else {
-			res.status(config.okCode).json({message: 'Server type created!'})
+			res.status(config.okCode).json({message: 'Server type created!'});
 		}
 	})
 };
 
+// Update a server type
+exports.Update = function(req, res) {
+	ServerTypes.findById(req.params.id, function(err, servertype) {
+		if (err) {
+			res.status(config.errorCode).json({error: err.message});
+		} else {
+			if(typeof req.body.description === 'undefined') {
+				servertype.description = req.body.description;
+			}
+			servertype.save(function(err) {
+				if (err) {
+					res.status(config.errorCode).json({error: err.message});
+				} else {
+					res.status(config.okCode).json({message: 'Server type updated!'});
+				}
+			});			
+		}
+	})
+}
+
+// Delete a server type
+exports.Delete = function(req, res) {
+	ServerTypes.remove({_id: req.params.id}, function(err, servertypes) {
+		if (err) {
+			res.status(config.errorCode).json({error: err.message});
+		} else {
+			res.status(config.okCode).json({message: 'Server type removed!'});
+		}
+	});
+}
