@@ -5,7 +5,7 @@ module.exports = function (router) {
 	router.get('/', controllers.IndexController.getIndex);
 
 	// server type collection
-	router.get('/server/types', controllers.ServerController.AllServerTypes);
-	router.get('/server/types/:serverTypeId', controllers.ServerController.ServerType);
-	router.post('/server/types', controllers.ServerController.SaveServerTypes);
+	router.get('/server/types', controllers.ServerTypeController.All);
+	router.get('/server/types/:serverTypeId', controllers.ServerTypeController.ById);
+	router.post('/server/types', controllers.ServerTypeController.Save);
 }

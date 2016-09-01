@@ -17,10 +17,10 @@ app.use(config.apiPrefix, router);
 
 mongoose.connect(config.dbUri, function(err, res) {
 	if (err) { 
-		console.log('DB connect error: ' + err); 
+		console.log('DB connect error: ' + err.message); 
 	} else {
 		app.listen(config.port, function() {
 		console.log('Server listen on port: ' + config.port);
-});
+		});
 	}
 });
