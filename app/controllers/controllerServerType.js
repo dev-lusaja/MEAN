@@ -9,7 +9,7 @@ exports.All = function(req, res) {
 		} else {
 			res.status(config.okCode).json({message: servertypes});
 		}
-	})
+	});
 };
 
 // Return a server type by id
@@ -20,14 +20,17 @@ exports.ById = function(req, res) {
 		} else {
 			res.status(config.okCode).json({message: servertype});
 		}
-	})
+	});
 };
 
 // Save a server type
 exports.Save = function(req, res) {
 	var serverTypes = new ServerTypes;
-	serverTypes.description = req.body.type;
-	serverTypes.createDate = req.body.createDate;
+	var created = new Date();
+	console.log(created);
+	serverTypes.name = req.body.name;
+	serverTypes.created = created;
+	serverTypes.status = true;
 
 	serverTypes.save(function(err) {
 		if (err) {
@@ -35,7 +38,7 @@ exports.Save = function(req, res) {
 		} else {
 			res.status(config.okCode).json({message: 'Server type created!'});
 		}
-	})
+	});
 };
 
 // Update a server type
@@ -44,8 +47,8 @@ exports.Update = function(req, res) {
 		if (err) {
 			res.status(config.errorCode).json({error: err.message});
 		} else {
-			if(typeof req.body.description === 'undefined') {
-				servertype.description = req.body.description;
+			if(typeof req.body.name === 'undefined') {
+				servertype.name = req.body.name;
 			}
 			servertype.save(function(err) {
 				if (err) {
@@ -55,7 +58,7 @@ exports.Update = function(req, res) {
 				}
 			});			
 		}
-	})
+	});
 }
 
 // Delete a server type

@@ -3,6 +3,7 @@ mongo_db:
   ports:
     - "27017:27017"
     - "28017:28017"
+  command: --smallfiles
 
 mongo_dashboard:
   image: mongo-express
@@ -23,3 +24,5 @@ api:
   links:
     - mongo_db
   entrypoint: /usr/local/mean/wait-for-it.sh mongo_db:27017 -s -- nodemon -L app/server.js
+  environment:
+    DBURI: 'mongodb://mongo_db:27017/DevOps'
