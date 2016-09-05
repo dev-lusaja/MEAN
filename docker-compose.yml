@@ -4,6 +4,8 @@ mongo_db:
     - "27017:27017"
     - "28017:28017"
   command: --smallfiles
+  volumes:
+    - mongodb_data:/data/db
 
 mongo_dashboard:
   image: mongo-express
